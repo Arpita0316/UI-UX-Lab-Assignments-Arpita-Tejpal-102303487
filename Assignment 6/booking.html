@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Your Trip</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header><h1>Book Your Trip</h1></header>
+  <nav>
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="packages.html" class="nav-link">Packages</a>
+    <a href="booking.html" class="nav-link">Booking</a>
+    <a href="gallery.html" class="nav-link">Gallery</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </nav>
+
+  <div class="container">
+    <form id="bookingForm">
+      <label>Full Name:</label>
+      <input id="name" type="text" required>
+
+      <label>Email:</label>
+      <input id="email" type="email" required>
+
+      <label>Check In:</label>
+      <input id="checkIn" type="date" required>
+
+      <label>Check Out:</label>
+      <input id="checkOut" type="date" required>
+
+      <label>Guests:</label>
+      <input id="guests" type="number" value="1" min="1" required>
+
+      <label>Destination:</label>
+      <select id="destination">
+        <option>Goa</option>
+        <option>Kerala</option>
+        <option>Jaipur</option>
+        <option>Leh Ladakh</option>
+      </select>
+
+      <label>Promo Code:</label>
+      <input id="promo" type="text" placeholder="Enter code (optional)">
+
+      <p id="totalDisplay"><strong>Estimated Total: ₹0</strong></p>
+      <button type="submit">Book Now</button>
+    </form>
+  </div>
+
+  <footer>&copy; 2025 Arpita India Travels</footer>
+</body>
+</html>

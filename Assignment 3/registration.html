@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration - College Fest 2025</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>Saturnalia 2025</header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="registration.html">Registration</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact & FAQs</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2>Participant Registration</h2>
+        <form action="#" method="POST">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="event">Select Event</label>
+            <select id="event" name="event">
+                <option value="debate">Debate Competition</option>
+                <option value="dance">Dance Battle</option>
+                <option value="photography">Photography Contest</option>
+                <option value="hackathon">Hackathon</option>
+                <option value="music">Music Band Performance</option>
+            </select>
+
+            <label for="message">Additional Information</label>
+            <textarea id="message" name="message" rows="4" placeholder="Any special requirements?"></textarea>
+
+            <input type="submit" value="Register Now">
+        </form>
+    </div>
+
+    <footer>
+        &copy; 2025 Saturnalia. All rights reserved.
+    </footer>
+</body>
+</html>

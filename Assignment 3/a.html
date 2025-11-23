@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple DOM Example</title>
+</head>
+<body>
+
+<h1 id="myTitle">Original Title</h1>
+
+<input id="userInput" placeholder="New Title">
+<button id="updateBtn">Update</button>
+
+<div class="highlight">Item 1</div>
+<div class="highlight">Item 2</div>
+
+<script>
+  // Select element by id
+  const title = document.getElementById("myTitle");
+
+  // Change background color
+  title.style.backgroundColor = "lightblue";
+
+  // Update text on button click
+  document.getElementById("updateBtn").addEventListener("click", () => {
+    title.textContent = document.getElementById("userInput").value || "Default Title";
+  });
+
+  // Change background of all elements with class on click
+  document.querySelectorAll(".highlight").forEach(el => {
+    el.addEventListener("click", () => el.style.backgroundColor = "yellow");
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gallery</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<script>
+  // Select all images inside the gallery
+  const galleryImages = document.querySelectorAll(".gallery img");
+
+  // Loop through each image
+  galleryImages.forEach(img => {
+    // Read attributes
+    console.log("Image Source:", img.getAttribute("src"));
+    console.log("Alt Text:", img.getAttribute("alt"));
+    console.log("Location:", img.dataset.location); // using dataset
+
+    // Modify attributes dynamically
+    img.setAttribute("title", `Click to explore ${img.dataset.location}`);
+    img.setAttribute("style", "cursor: pointer; border-radius: 10px; transition: 0.3s;");
+
+    // Example: Add click event to change border color
+    img.addEventListener("click", () => {
+      img.style.border = "4px solid gold";
+      alert(`You clicked on ${img.alt} - ${img.dataset.location}`);
+    });
+  });
+</script>
+
+<body>
+  <header><h1>Gallery</h1></header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="packages.html">Packages</a>
+    <a href="booking.html">Booking</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  
+  <div class="container gallery">
+  <div>
+    <img src="images/GOA BEACH.jpeg" alt="Goa Beach" data-location="Goa, India">
+    <p>Sunny Goa Beaches</p>
+  </div>
+  <div>
+    <img src="images/KERALA BACKWATERS.jpeg" alt="Kerala Backwaters" data-location="Kerala, India">
+    <p>Serene Kerala Backwaters</p>
+  </div>
+  <div>
+    <img src="images/JAIPUR PALACE.jpeg" alt="Jaipur Palace" data-location="Jaipur, India">
+    <p>Royal Jaipur Palaces</p>
+  </div>
+  <div>
+    <img src="images/Leh Ladakh Mountains.jpeg" alt="Leh Ladakh Mountains" data-location="Leh Ladakh, India">
+    <p>Adventurous Leh Ladakh</p>
+  </div>
+</div>
+
+  <footer>&copy; 2025 Arpita Travels</footer>
+</body>
+</html>

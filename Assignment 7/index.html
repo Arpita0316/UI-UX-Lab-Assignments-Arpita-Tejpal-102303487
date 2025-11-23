@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <style>
+    /* ===== Page Styling ===== */
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      color: #fff;
+    }
+
+    h1 {
+      margin: 30px 0 20px;
+      font-size: 2.5rem;
+      text-align: center;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+    }
+
+    /* ===== Input Section ===== */
+    .input-section {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0px 8px 20px rgba(0,0,0,0.3);
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+      margin-bottom: 30px;
+    }
+
+    .input-section input {
+      padding: 12px 15px;
+      border: none;
+      border-radius: 12px;
+      font-size: 14px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.9);
+      transition: 0.3s;
+    }
+
+    .input-section input:focus {
+      box-shadow: 0px 0px 8px rgba(255,255,255,0.8);
+    }
+
+    .input-section button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #43e97b, #38f9d7);
+      color: #fff;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .input-section button:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 4px 15px rgba(56, 249, 215, 0.6);
+    }
+
+    /* ===== Task List ===== */
+    #taskList {
+      width: 90%;
+      max-width: 600px;
+    }
+
+    .task {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0px 6px 15px rgba(0,0,0,0.2);
+      backdrop-filter: blur(10px);
+      transform: scale(0.95);
+      opacity: 0;
+      animation: fadeIn 0.4s forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .task span {
+      display: inline-block;
+      margin-bottom: 5px;
+      font-size: 16px;
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .task .completed {
+      text-decoration: line-through;
+      color: #ddd;
+    }
+
+    /* ===== Buttons inside task ===== */
+    .task-buttons {
+      margin-top: 12px;
+    }
+
+    .task-buttons button {
+      margin-right: 8px;
+      padding: 8px 14px;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .task-buttons button:nth-child(1) {
+      background: linear-gradient(135deg, #56ab2f, #a8e063);
+      color: white;
+    }
+    .task-buttons button:nth-child(1):hover {
+      transform: scale(1.05);
+      box-shadow: 0px 4px 12px rgba(86,171,47,0.5);
+    }
+
+    .task-buttons button:nth-child(2) {
+      background: linear-gradient(135deg, #f7971e, #ffd200);
+      color: white;
+    }
+    .task-buttons button:nth-child(2):hover {
+      transform: scale(1.05);
+      box-shadow: 0px 4px 12px rgba(247,151,30,0.5);
+    }
+
+    .task-buttons button:nth-child(3) {
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      color: white;
+    }
+    .task-buttons button:nth-child(3):hover {
+      transform: scale(1.05);
+      box-shadow: 0px 4px 12px rgba(255,65,108,0.6);
+    }
+
+    /* Inputs while editing */
+    .task input {
+      margin-bottom: 6px;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      width: calc(100% - 20px);
+      font-size: 14px;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>To-Do List</h1>
+
+  <div class="input-section">
+    <input type="text" id="taskTitle" placeholder="Task Title">
+    <input type="text" id="taskDescription" placeholder="Task Description">
+    <button onclick="addTask()">Add Task</button>
+  </div>
+
+  <div id="taskList"></div>
+
+  <script>
+    function addTask() {
+      const title = document.getElementById("taskTitle").value;
+      const description = document.getElementById("taskDescription").value;
+
+      if (!title.trim() || !description.trim()) {
+        alert("Please enter both a title and description!");
+        return;
+      }
+
+      const taskDiv = document.createElement("div");
+      taskDiv.className = "task";
+
+      const taskTitle = document.createElement("span");
+      taskTitle.textContent = title;
+
+      const taskDescription = document.createElement("span");
+      taskDescription.textContent = " - " + description;
+
+      const buttonsDiv = document.createElement("div");
+      buttonsDiv.className = "task-buttons";
+
+      // Mark as Completed Button
+      const completeBtn = document.createElement("button");
+      completeBtn.textContent = "Mark as Completed";
+      completeBtn.onclick = function () {
+        taskTitle.classList.toggle("completed");
+        taskDescription.classList.toggle("completed");
+        completeBtn.textContent =
+          completeBtn.textContent === "Mark as Completed"
+            ? "Mark as Incomplete"
+            : "Mark as Completed";
+      };
+
+      // Edit Button
+      const editBtn = document.createElement("button");
+      editBtn.textContent = "Edit";
+      editBtn.onclick = function () {
+        if (editBtn.textContent === "Edit") {
+          const titleInput = document.createElement("input");
+          titleInput.type = "text";
+          titleInput.value = taskTitle.textContent;
+
+          const descInput = document.createElement("input");
+          descInput.type = "text";
+          descInput.value = taskDescription.textContent.replace(" - ", "");
+
+          taskDiv.insertBefore(titleInput, taskTitle);
+          taskDiv.insertBefore(descInput, taskDescription);
+          taskDiv.removeChild(taskTitle);
+          taskDiv.removeChild(taskDescription);
+
+          editBtn.textContent = "Save";
+        } else {
+          const inputs = taskDiv.querySelectorAll("input[type='text']");
+          const titleInput = inputs[0];
+          const descInput = inputs[1];
+
+          taskTitle.textContent = titleInput.value;
+          taskDescription.textContent = " - " + descInput.value;
+
+          taskDiv.insertBefore(taskTitle, titleInput);
+          taskDiv.insertBefore(taskDescription, descInput);
+          taskDiv.removeChild(titleInput);
+          taskDiv.removeChild(descInput);
+
+          editBtn.textContent = "Edit";
+        }
+      };
+
+      // Delete Button
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Delete";
+      deleteBtn.onclick = function () {
+        taskDiv.style.opacity = "0";
+        taskDiv.style.transform = "scale(0.9)";
+        setTimeout(() => taskDiv.remove(), 300);
+      };
+
+      buttonsDiv.appendChild(completeBtn);
+      buttonsDiv.appendChild(editBtn);
+      buttonsDiv.appendChild(deleteBtn);
+
+      taskDiv.appendChild(taskTitle);
+      taskDiv.appendChild(taskDescription);
+      taskDiv.appendChild(buttonsDiv);
+
+      document.getElementById("taskList").appendChild(taskDiv);
+
+      // Clear inputs
+      document.getElementById("taskTitle").value = "";
+      document.getElementById("taskDescription").value = "";
+    }
+  </script>
+
+</body>
+</html>
+
+
